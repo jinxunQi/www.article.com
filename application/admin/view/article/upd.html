@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <link href="{:config('admin_static')}/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/static/plugins/layedit/src/css/layui.css" rel="stylesheet" type="text/css" />
+    <script language="JavaScript" src="{:config('admin_static')}/js/jquery.js"></script>
+    <script language="JavaScript" src="/static/plugins/layedit/src/layui.js"></script>
+    <script language="JavaScript" src="/static/plugins/placeImage.js"></script>
+    <style>
+        .active{
+            border-bottom: solid 3px #66c9f3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">表单</a></li>
+        </ul>
+    </div>
+    <div class="formbody">
+        <div class="formtitle">
+            <span class="active">基本信息</span>
+        </div>
+        <form action="{:url('admin/article/upd')}" method="post" enctype="multipart/form-data">
+            <!--文章编辑页一般在form标签下加一个隐藏域-->
+            <input type="hidden" name="article_id" value="{$art['article_id']}">
+            <ul class="forminfo">
+                <li>
+                    <label>文章标题</label>
+                    <input name="title" value="{$art['title']}" placeholder="请输入商品名称" type="text" class="dfinput" /><i></i>
+                </li>
+                <li>
+                    <label>文章图片</label>
+                    <input name="img" id="f" onchange="change()" placeholder="请输入商品名称" type="file"  /><i></i>
+                </li>
+                <p>
+                    <img id="preview" src="/upload/{$art['ori_img']}" alt="" width="300px"  name="pic" />
+                </p>
+                <li>
+                    <label>文章所属类型</label>
+                    <select name="cat_id" id="" class="dfinput">
+                        <option value="">请选择一种分类</option>
+                        {foreach name='cats' item='cat'}
+                            <option value="{$cat['cat_id']}">{:str_repeat('&nbsp;',$cat['level']*4)}{$cat['cat_name']}</option>
+                        {/foreach}
+                    </select>
+                </li>
+                <li>
+                    <label>文章内容</label>
+                    <textarea name="content" placeholder="请输入商品描述" cols="" rows="" id="content">
+                        {$art['content']}
+                    </textarea>
+                </li>
+                
+            </ul>
+			<li>
+                    <label>&nbsp;</label>
+                    <input name="" id="btnSubmit" type="submit" class="btn" value="确认保存" />
+             </li>
+        </form>
+    </div>
+</body>
+<script>
+    layui.use('layedit', function(){
+        var layedit = layui.layedit;
+
+        var index = layedit.build('content', {
+            //hideTool: ['image']
+            uploadImage: {
+                url: '/layui/upload.php'
+                ,type: 'post'
+            }
+            ,tool: [
+                //数组留空显示所有
+                'strong' //加粗
+                ,'italic' //斜体
+                ,'underline' //下划线
+                ,'del' //删除线
+
+                ,'|' //分割线
+
+                ,'left' //左对齐
+                ,'center' //居中对齐
+                ,'right' //右对齐
+                ,'link' //超链接
+                ,'unlink' //清除链接
+                ,'face' //表情
+                //,'image' //插入图片
+                ,'help' //帮助
+            ]
+
+            ,height: 300
+        });
+
+    });
+
+    $("select[name='cat_id']").val("{$art['cat_id']}");
+</script>
+
+</html>

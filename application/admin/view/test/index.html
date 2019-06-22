@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>测试的模板</h2>
+    跳转测试: <a href="{:url('/top')}">跳转到top方法</a>
+    <hr>
+    跳转测试: <a href="{:url('/top',['id'=>8,'name'=>'xb'])}">跳转到top方法</a>
+    <hr>
+    跳转测试: <a href="{:url('admin/index/index',['id'=>100,'name'=>'abc'])}">跳转到admin/index/index方法</a>
+    <hr>
+    跳转测试: <a href="{:url('admin/test/index2',['id'=>100,'name'=>'abc'])}">跳转到admin/test/index2方法</a>
+    <hr>
+    <form action="{:url('admin/test/index3')}" method="post">
+        爱好: <input type="checkbox" name="ids[]" value="1">打篮球
+              <input type="checkbox" name="ids[]" value="2">打网球
+              <input type="checkbox" name="ids[]" value="3">打地球 <br>
+        用户名：<input type="text" name="username"> <br>
+        邮箱： <input type="text" name="email"> <br>
+        <input type="submit" value="提交">
+    </form>
+</body
+</html>

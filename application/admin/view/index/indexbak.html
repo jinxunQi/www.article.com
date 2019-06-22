@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>我是index模版 </h2>
+大名:{$name} <br>
+芳龄:{$age}
+<hr>
+
+{volist name='users' id='user'}
+<br>大名: {$key+1} {$user['username']} ------> 芳龄: {$user['age']}
+{/volist}
+<hr>
+
+{volist name='users' id='user' key='k'}
+<br>大名: {$k} {$user['username']} ------> 芳龄: {$user['age']}
+{/volist}
+<hr>
+
+{foreach name='users' item='user'}
+<br>大名: {$key+1} {$user['username']} ------> 芳龄: {$user['age']}
+{/foreach}
+<hr>
+<hr>
+{php}
+    echo $name;
+    echo '<br>';
+    echo $age;
+    echo '<br>';
+    foreach ($users as $k => $values){
+            echo '大名:'.($k+1).$values['username'].'-------->芳龄:'.$values['age'];
+            echo '<br>';
+    }
+{/php}
+<hr>
+<?php
+    echo $name;
+    print_r($users);
+?>
+
+</body>
+</html>
